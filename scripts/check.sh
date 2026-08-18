@@ -36,9 +36,10 @@ printf '%s\n' "== remote installer download regression =="
 sh scripts/test-installer-download.sh
 
 printf '%s\n' "== source reference check =="
-if grep -n 'gitlab.com/spiritysdx/Oracle-server-keep-alive-script' \
+legacy_source_host=$(printf '%s%s' 'git' 'lab.com')
+if grep -n "$legacy_source_host/spiritysdx/Oracle-server-keep-alive-script" \
   README.md README_EN.md README_CRON.md README_CRON_EN.md oalive.sh; then
-  printf '%s\n' "GitLab source references must be migrated to GitHub Raw" >&2
+  printf '%s\n' "Legacy source references must be migrated to GitHub Raw" >&2
   exit 1
 fi
 
