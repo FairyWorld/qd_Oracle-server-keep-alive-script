@@ -9,8 +9,9 @@ fixture_dir=$test_root/source
 install_dir=$test_root/bin
 systemd_dir=$test_root/systemd
 
-cleanup() {
-  rm -rf "$test_root"
+test_cleanup() {
+  find "$test_root" -depth -type f -exec unlink {} \; 2>/dev/null || true
+  find "$test_root" -depth -type d -exec rmdir {} \; 2>/dev/null || true
 }
 
 fail() {
@@ -18,7 +19,7 @@ fail() {
   exit 1
 }
 
-trap cleanup EXIT HUP INT TERM
+trap test_cleanup EXIT HUP INT TERM
 
 mkdir -p "$fixture_dir" "$install_dir"
 for test_file in \
